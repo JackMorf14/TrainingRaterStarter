@@ -6,17 +6,17 @@ import { AppComponent } from './app.component';
 import { SessionsService } from './sessions/sessions.service';
 import { SessionsListComponent } from './sessions/sessions-list/sessions-list.component';
 import { HomeComponent } from './home/home.component';
-import { AppRoutingModule } from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from './users/users.service';
 import { UsersListComponent } from './users/users-list/users-list.component';
+import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SessionsListComponent,
     HomeComponent,
-    UsersService,
     UsersListComponent
   ],
   imports: [
