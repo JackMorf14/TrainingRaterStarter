@@ -17,7 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     SessionsListComponent,
     HomeComponent,
-    UsersListComponent
+    UsersListComponent,
   ],
   imports: [
     BrowserModule,
