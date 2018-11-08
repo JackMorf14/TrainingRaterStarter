@@ -24,7 +24,9 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.4",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "express": "^4.16.4",
     "rxjs": "^5.5.6",
+    "sequelize": "^4.31.2",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
@@ -46,5 +48,19 @@
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.",
+  "main": "karma.conf.js",
+  "bin": {
+    "training-rater-starter": "www.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackMorf14/TrainingRaterStarter.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/JackMorf14/TrainingRaterStarter/issues"
+  },
+  "homepage": "https://github.com/JackMorf14/TrainingRaterStarter#readme"
 }
