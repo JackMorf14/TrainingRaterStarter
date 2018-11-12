@@ -1,29 +1,33 @@
-// const http = require('http')
-const express = require('express')
+var express = require('express');
+require('./config/config');
+var models = require('./models');
+require('./global_functions');
+var sessions = require('./controllers/SessionsController');
+var bodyParser = require('body-parser');
 
+var app = express();
 
-// const port = 8080; offset here by the www.js file where port 3000 is defined
-const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => { res.send('Hello World') });
-app.get('/user', (req, res)=> {res.send('Hello User')});
-app.get('/home', (req, res)=> {res.send('Hello Home')})
+app.get('/', (req, res) => {res.send("Hello World!")});
 
-app.post('/', (req, res) => {res.send('Got Post Request')});
-app.post('/user', (req, res)=> {res.send('Got Post User Request')});
-app.post('/home', (req, res)=> {res.send('Got Post HomeRequest')});
+models.sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.log('Unable to connect to the database.', err);
+    });
 
-app.put('/', (req, res) => {res.send('Got Put Request')});
+if (CONFIG.app === 'dev') {
+    models.sequelize.sync();
+}
 
-module.exports = app;
+app.get('/sessions', sessions.getAll);
+app.get('/sessions/:sessionId', sessions.get);
+app.post('/sessions', sessions.create);
+app.put('/sessions', sessions.update);
 
-// app.listen(port);
-
-
-
-// const server = http.createServer(function (req, res){
-//     res.writeHead(200);
-//     res.end("Hello World");
-// })
-
-// server.listen(port);
+module.exports = app; //lets you use this module in other places
