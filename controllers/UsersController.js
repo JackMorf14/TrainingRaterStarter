@@ -100,27 +100,4 @@ const update = async (req, res) => {
 }
 module.exports.update = update;
 
-const destroy = async (req, res) => {
-    let err, user, data;
-    data = req.body;
-    res.setHeader('Content-Type', 'application/json');
 
-
-    [err, user] = await to(Users.destroy(data, {
-        where: {
-            id: id.data
-        }
-    }))
-    if (err) {
-        if (typeof err == 'object' && typeof err.message != 'undefined') {
-            err = err.message;
-        }
-        
-        if (typeof code != 'undefined') res.statusCode = code;
-        res.statusCode = 422; // unprocessable entity
-        return res.json({ success: false, error: err });
-    }
-    res.statusCode = 201;
-    return res.json(user);
-}
-module.exports.destroy = destroy;
