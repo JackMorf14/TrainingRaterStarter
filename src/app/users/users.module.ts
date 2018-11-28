@@ -18,6 +18,5 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [UsersService],
-  bootstrap: []
 })
 export class UsersModule { }

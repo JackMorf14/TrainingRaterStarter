@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISession, SessionsService } from '../sessions.service';
-
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
-    templateUrl: './session-detail.component.html'
+    templateUrl: './session-detail.component.html',
 })
 export class SessionsDetailComponent implements OnInit {
 
@@ -14,6 +14,7 @@ export class SessionsDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private sessionsService: SessionsService,
+        private toastsManager: ToastsManager,
     ) { }
 
     ngOnInit() {
@@ -21,16 +22,16 @@ export class SessionsDetailComponent implements OnInit {
         // tslint:disable-next-line:radix
         id = isNaN(parseInt(id)) ? 0 : parseInt(id);
         if (id > 0) {
-            // get from DB
+            // get from db
             this.sessionsService.getSessionById(id)
                 .subscribe((session) => {
                     const startTime = new Date(session.startTime);
-                    startTime.setHours(startTime.getHours() + (startTime.getTimezoneOffset() / 60));
-                    session.startTime = startTime.toISOString();
+                    startTime.setHours(startTime.getHours() - (startTime.getTimezoneOffset() / 60));
+                    session.startTime = startTime.toISOString().slice(0, 16);
                     this.session = session;
                 });
         } else {
-            // new session
+            // new
             this.session = {
                 id: 0,
                 name: '',
@@ -50,13 +51,12 @@ export class SessionsDetailComponent implements OnInit {
 
     save(): void {
         if (!this.formValid()) {
-            // TODO CCC: pop message about not valid
-            console.log('form invalid');
+            this.toastsManager.error('Form invalid');
             return;
         }
         this.sessionsService.save(this.session)
             .subscribe((session) => {
-                // TODO CCC: add a success message
+                this.toastsManager.success('Session saved');
                 this.router.navigate(['sessions']);
             });
     }

@@ -1,13 +1,13 @@
-<button class="btn btn-primary" (click)="goToAdd()">Add User</button><div class="container">
-  <br>
-  <div class="row">
+<div class="row">
+    <button class="btn btn-primary" (click)="goToAdd()">Add User</button><div class="container"></div>
+    <br>
     <div class="col-md-4"><strong>First Name</strong></div>
     <div class="col-md-4"><strong>Last Name</strong></div>
     <div class="col-md-4"><strong>Date of Birth</strong></div>
   </div>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let user of users">
-      <div class="row">
+      <div class="row"  [style.cursor]="'pointer'" (click)="goToEdit(user.id)">
         <div class="col-md-4">{{ user.fName }}</div>
         <div class="col-md-4">{{ user.lName }}</div>
         <div class="col-md-4">{{ user.DOB }}</div>
@@ -15,4 +15,4 @@
     </li>
   </ul>
   <!-- </div> -->
-</div>
+
